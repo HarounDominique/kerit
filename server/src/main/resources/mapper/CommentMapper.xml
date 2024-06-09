@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haroun.server.repository.ICommentMyBatisRepository">
+
+    <resultMap id="CommentResultMap" type="com.haroun.server.model.Comment">
+        <id property="id" column="id"/>
+        <result property="content" column="content"/>
+        <!--collection property="localidades" ofType="com.haroun.server.model.Localidad" column="id" select="mapper.LocalidadMapper.selectByProvinciaId"/-->
+    </resultMap>
+
+    <select id="findAll" resultMap="CommentResultMap">
+        SELECT *
+        FROM "comment"
+    </select>
+
+    <!-- En principio debería traer todos lod comentarios de un usuario pasándole el id de dicho usuario-->
+    <select id="findCommentsContentByUserId" resultMap="CommentResultMap">
+        SELECT content, id
+        FROM "comment"
+        WHERE creator_id = #{id}
+    </select>
+
+    <select id="deleteCommentsByUser" resultMap="CommentResultMap">
+        DELETE FROM "comment"
+        WHERE creator_id = #{id}
+    </select>
+</mapper>
