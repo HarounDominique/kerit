@@ -1,13 +1,11 @@
 package com.haroun.server.repository;
 
-import com.haroun.server.model.Comment;
+import com.haroun.server.model.CommentVote;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
-public interface ICommentRepository extends JpaRepository<Comment, Long> {
-    List<Comment> findByUserId(Long userId);
+public interface ICommentVoteRepository extends JpaRepository<CommentVote, Long> {
+    void deleteByCommentId(Long commentId);
     void deleteByUserId(Long userId);
 }
